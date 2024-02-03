@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rideeye/authentication/login_screen.dart';
+import 'package:rideeye/authentication/sign_up_screen_two.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const SignUpScreenTwo(),
     );
   }
 }

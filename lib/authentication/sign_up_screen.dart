@@ -4,17 +4,17 @@ import 'package:rideeye/utils/buttons/b1.dart';
 import 'package:rideeye/utils/buttons/b2.dart';
 import 'package:rideeye/utils/textFields/input_text_1.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,16 +33,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Image.asset(
                   'assets/icons/ride_logo_trsprnt.png',
-                  height: MediaQuery.of(context).size.height * 0.1875,
-                  width: MediaQuery.of(context).size.width * 0.833,
+                  height: MediaQuery.of(context).size.height * 0.1175,
+                  width: MediaQuery.of(context).size.width * 0.533,
                 ),
                 SizedBox(
                   height: 40,
-                  width: 240,
+                  width: 280,
                   child: Text(
-                    'Never miss a bus, find your bus routes in the area',
+                    'Create Account',
                     style: GoogleFonts.mochiyPopOne(
-                      fontSize: 14,
+                      fontSize: 28,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -54,38 +54,44 @@ class _LoginScreenState extends State<LoginScreen> {
                     isNumber: false,
                     isPassword: false,
                     textEditingController: emailController,
-                    hintText: 'Email address'),
+                    hintText: 'Full name*'),
+                const SizedBox(
+                  height: 20,
+                ),
+                InputTextOne(
+                    isNumber: false,
+                    isPassword: false,
+                    textEditingController: emailController,
+                    hintText: 'Email address*'),
                 const SizedBox(
                   height: 20,
                 ),
                 InputTextOne(
                     isNumber: false,
                     isPassword: true,
-                    textEditingController: passwordController,
-                    hintText: 'Password'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          'Forgot Password?',
-                          style: GoogleFonts.mochiyPopOne(
-                            fontSize: 12,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
+                    textEditingController: emailController,
+                    hintText: 'Password*'),
+                const SizedBox(
+                  height: 20,
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.15,
+                InputTextOne(
+                    isNumber: false,
+                    isPassword: false,
+                    textEditingController: emailController,
+                    hintText: 'Enrollment Number*'),
+                const SizedBox(
+                  height: 20,
+                ),
+                InputTextOne(
+                    isNumber: true,
+                    isPassword: false,
+                    textEditingController: emailController,
+                    hintText: 'Scholar Number*'),
+                const SizedBox(
+                  height: 20,
                 ),
                 ButtonOne(
-                  buttonText: 'Sign In',
+                  buttonText: 'Next',
                   onTap: () {},
                 ),
                 const SizedBox(
@@ -96,13 +102,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () {},
                 ),
                 const SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Not a member yet? ',
+                      'Already Member? ',
                       style: GoogleFonts.mochiyPopOne(
                         fontSize: 12,
                       ),
@@ -111,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {},
                       child: Text(
-                        'Sign up',
+                        'Log in',
                         style: GoogleFonts.mochiyPopOne(
                             fontSize: 12, color: Colors.blue),
                         textAlign: TextAlign.center,
