@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rideeye/authentication/sign_up_screen.dart';
 import 'package:rideeye/utils/buttons/b1.dart';
 import 'package:rideeye/utils/buttons/b2.dart';
 import 'package:rideeye/utils/textFields/input_text_1.dart';
@@ -8,13 +10,13 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _MyWidgetState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
-class _MyWidgetState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,12 +53,16 @@ class _MyWidgetState extends State<LoginScreen> {
                   height: 40,
                 ),
                 InputTextOne(
+                    isNumber: false,
+                    isPassword: false,
                     textEditingController: emailController,
                     hintText: 'Email address'),
                 const SizedBox(
                   height: 20,
                 ),
                 InputTextOne(
+                    isNumber: false,
+                    isPassword: true,
                     textEditingController: passwordController,
                     hintText: 'Password'),
                 Padding(
@@ -82,7 +88,10 @@ class _MyWidgetState extends State<LoginScreen> {
                 ),
                 ButtonOne(
                   buttonText: 'Sign In',
-                  onTap: () {},
+                  onTap: () => Get.to(
+                    () => const SignUpScreen(),
+                    transition: Transition.fade,
+                  ),
                 ),
                 const SizedBox(
                   height: 20,

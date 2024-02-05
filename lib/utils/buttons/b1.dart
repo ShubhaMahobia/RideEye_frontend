@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: must_be_immutable
 class ButtonOne extends StatelessWidget {
   String buttonText;
-  Function onTap;
+  VoidCallback onTap;
   ButtonOne({super.key, required this.buttonText, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap(),
+      onTap: onTap,
       child: Container(
         height: 50,
         width: MediaQuery.of(context).size.width,
