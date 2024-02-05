@@ -49,7 +49,7 @@ class SignUpController extends GetxController {
           context: Get.context as BuildContext,
           builder: (context) => SuccessDailog(
             heading: 'Success',
-            text: 'Ready to Go!!!',
+            text: 'Verification Email Sent!!!',
           ),
         );
       } else {
@@ -62,6 +62,7 @@ class SignUpController extends GetxController {
         );
       }
     } catch (e) {
+      print(e);
       showDialog(
         context: Get.context as BuildContext,
         builder: (context) => ErrorDialog(
