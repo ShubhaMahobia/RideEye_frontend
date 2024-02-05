@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
@@ -43,8 +44,10 @@ class SignUpController extends GetxController {
         headers: {'Content-Type': 'application/json'},
         body: body,
       );
+
       var jsondata = json.decode(res.body);
       if (jsondata['success'] == true) {
+        EasyLoading.dismiss();
         showDialog(
           context: Get.context as BuildContext,
           builder: (context) => SuccessDailog(

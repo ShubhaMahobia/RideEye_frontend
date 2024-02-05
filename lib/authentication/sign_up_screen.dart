@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rideeye/authentication/login_screen.dart';
@@ -153,8 +156,23 @@ class SignUpScreenTwo extends StatefulWidget {
 }
 
 String selectedValue = 'Option 1';
+String completeAddress = _signUpController.addressOneController.text +
+    _signUpController.addressTwoController.text +
+    _signUpController.addressThreeController.text;
 
 class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    EasyLoading.addStatusCallback((status) {
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -269,13 +287,14 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                 ),
                 ButtonOne(
                   buttonText: 'Create Account',
-                  onTap: () {
+                  onTap: () async {
+                    EasyLoading.show(status: 'Saving...');
                     _signUpController.signUp(
                       _signUpController.fullNameController.text,
                       _signUpController.emailController.text,
                       _signUpController.passwordController.text,
                       _signUpController.enrollmentController.text,
-                      _signUpController.addressOneController.text,
+                      completeAddress,
                       _signUpController.phoneController.text,
                       "123",
                       _signUpController.scholarController.text,
