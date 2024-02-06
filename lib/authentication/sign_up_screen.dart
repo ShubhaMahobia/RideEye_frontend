@@ -155,10 +155,11 @@ class SignUpScreenTwo extends StatefulWidget {
   State<SignUpScreenTwo> createState() => _SignUpScreenTwoState();
 }
 
-String selectedValue = 'Option 1';
 String completeAddress = _signUpController.addressOneController.text +
     _signUpController.addressTwoController.text +
     _signUpController.addressThreeController.text;
+
+String busNumber = _signUpController.busNumberController.text.toUpperCase();
 
 class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
   Timer? _timer;
@@ -208,44 +209,25 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                 const SizedBox(
                   height: 40,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  width: 240,
-                  height: 50,
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    borderRadius: BorderRadius.circular(10),
-                    elevation: 8,
-                    dropdownColor: Colors.blue[50],
-                    icon: const Icon(
-                      Icons.bus_alert,
-                      color: Colors.black,
+                Row(
+                  children: [
+                    Text(
+                      'Bus Number',
+                      style: GoogleFonts.mochiyPopOne(),
                     ),
-                    menuMaxHeight: 160,
-                    style: GoogleFonts.mochiyPopOne(
-                        fontSize: 12, color: Colors.black),
-                    value: selectedValue,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedValue = newValue!;
-                      });
-                    },
-                    items: <String>[
-                      'Option 1',
-                      'Option 2',
-                      'Option 3',
-                      'Option 4'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    SizedBox(
+                      width: 180,
+                      child: InputTextOne(
+                          isNumber: false,
+                          isPassword: false,
+                          textEditingController:
+                              _signUpController.busNumberController,
+                          hintText: 'Optional'),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 20,
@@ -296,7 +278,7 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                       _signUpController.enrollmentController.text,
                       completeAddress,
                       _signUpController.phoneController.text,
-                      "123",
+                      busNumber,
                       _signUpController.scholarController.text,
                     );
                   },

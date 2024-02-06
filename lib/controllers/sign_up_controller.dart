@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
 import 'package:rideeye/utils/dialogBox/success_dialogbox.dart';
+import 'package:rideeye/utils/validations/validator.dart';
 
 class SignUpController extends GetxController {
   final TextEditingController fullNameController = TextEditingController();
@@ -17,6 +18,7 @@ class SignUpController extends GetxController {
   final TextEditingController addressTwoController = TextEditingController();
   final TextEditingController addressThreeController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController busNumberController = TextEditingController();
 
   signUp(
     String fullName,
@@ -29,42 +31,56 @@ class SignUpController extends GetxController {
     String scholarNumber,
   ) async {
     try {
-      String body = json.encode({
-        "fullName": fullName,
-        "email": email,
-        "password": password,
-        "enrollmentNumber": enrollmentNumber,
-        "phoneNumber": "9479798601",
-        "address": address,
-        "busNumber": "dummy Bus Number",
-        "scholarNumber": scholarNumber,
-      });
-      http.Response res = await http.post(
-        Uri.parse('https://rideeyebackend.azurewebsites.net/api/signUp'),
-        headers: {'Content-Type': 'application/json'},
-        body: body,
-      );
+      if (Validation().isValidRegistrationForm(
+          fullNameController.text,
+          emailController.text,
+          passwordController.text,
+          enrollmentController.text,
+          scholarController.text,
+          addressOneController.text,
+          addressTwoController.text,
+          phoneNumber)) {
+        String body = json.encode({
+          "fullName": fullName,
+          "email": email,
+          "password": password,
+          "enrollmentNumber": enrollmentNumber,
+          "phoneNumber": "9479798601",
+          "address": address,
+          "busNumber": busNumber,
+          "scholarNumber": scholarNumber,
+        });
+        http.Response res = await http.post(
+          Uri.parse('https://rideeyebackend.azurewebsites.net/api/signUp'),
+          headers: {'Content-Type': 'application/json'},
+          body: body,
+        );
 
-      var jsondata = json.decode(res.body);
-      if (jsondata['success'] == true) {
-        EasyLoading.dismiss();
-        showDialog(
-          context: Get.context as BuildContext,
-          builder: (context) => SuccessDailog(
-            heading: 'Success',
-            text: 'Verification Email Sent!!!',
-          ),
-        );
+        var jsondata = json.decode(res.body);
+        if (jsondata['success'] == true) {
+          EasyLoading.dismiss();
+          showDialog(
+            context: Get.context as BuildContext,
+            builder: (context) => SuccessDailog(
+              heading: 'Success',
+              text: 'Verification Email Sent!!!',
+            ),
+          );
+        } else {
+          EasyLoading.dismiss();
+          showDialog(
+            context: Get.context as BuildContext,
+            builder: (context) => ErrorDialog(
+              heading: 'Oops',
+              text: jsondata['message'],
+            ),
+          );
+        }
       } else {
-        showDialog(
-          context: Get.context as BuildContext,
-          builder: (context) => ErrorDialog(
-            heading: 'Oops',
-            text: 'Internal Server Error',
-          ),
-        );
+        EasyLoading.dismiss();
       }
     } catch (e) {
+      EasyLoading.dismiss();
       print(e);
       showDialog(
         context: Get.context as BuildContext,

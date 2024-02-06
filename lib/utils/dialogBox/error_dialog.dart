@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rideeye/authentication/login_screen.dart';
 
 // ignore: must_be_immutable
 class ErrorDialog extends StatelessWidget {
@@ -33,16 +32,20 @@ class ErrorDialog extends StatelessWidget {
               style: GoogleFonts.mochiyPopOne(
                   fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Text(
-              text,
-              style: GoogleFonts.mochiyPopOne(
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.grey),
+            SizedBox(
+              width: 200,
+              child: Text(
+                text,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.mochiyPopOne(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => const LoginScreen());
+                Get.back();
               },
               child: Text(
                 'Try Again',
