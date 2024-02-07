@@ -21,6 +21,19 @@ final SignUpController _signUpController = Get.put(SignUpController());
 
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
+  void dispose() {
+    _signUpController.fullNameController.clear();
+    _signUpController.passwordController.clear();
+    _signUpController.enrollmentController.clear();
+    _signUpController.scholarController.clear();
+    _signUpController.busNumberController.clear();
+    _signUpController.addressOneController.clear();
+    _signUpController.addressTwoController.clear();
+    _signUpController.addressThreeController.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -58,6 +71,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.fullNameController,
                     decoration:
                         FormInputField.formTextField(context, 'Full name*'),
@@ -81,6 +96,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    obscureText: true,
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.passwordController,
                     decoration:
                         FormInputField.formTextField(context, 'Password*'),
@@ -92,6 +110,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.enrollmentController,
                     decoration: FormInputField.formTextField(
                         context, 'Enrollment Number*'),
@@ -103,6 +123,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     keyboardType: TextInputType.phone,
                     controller: _signUpController.scholarController,
                     decoration: FormInputField.formTextField(
@@ -248,9 +270,13 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                     const SizedBox(
                       width: 20,
                     ),
-                    SizedBox(
+                    Container(
+                      decoration:
+                          FormInputField.formTextFieldContainer(context),
                       width: 180,
                       child: TextField(
+                        style: GoogleFonts.plusJakartaSans(
+                            fontSize: 14, fontWeight: FontWeight.w600),
                         controller: _signUpController.busNumberController,
                         decoration:
                             FormInputField.formTextField(context, 'Optional'),
@@ -264,6 +290,8 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.addressOneController,
                     decoration: FormInputField.formTextField(
                         context, 'Address Line 1*'),
@@ -275,6 +303,8 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.addressTwoController,
                     decoration: FormInputField.formTextField(
                         context, 'Address Line 2*'),
@@ -286,6 +316,8 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.addressThreeController,
                     decoration: FormInputField.formTextField(
                         context, 'Address Line 3 (Optional)*'),
@@ -297,6 +329,8 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                 Container(
                   decoration: FormInputField.formTextFieldContainer(context),
                   child: TextField(
+                    style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.phoneController,
                     keyboardType: TextInputType.number,
                     decoration:
@@ -330,8 +364,9 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                   children: [
                     Text(
                       'Already Member? ',
-                      style: GoogleFonts.mochiyPopOne(
-                        fontSize: 12,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -339,8 +374,10 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                       onTap: () {},
                       child: Text(
                         'Log in',
-                        style: GoogleFonts.mochiyPopOne(
-                            fontSize: 12, color: Colors.blue),
+                        style: GoogleFonts.plusJakartaSans(
+                            fontSize: 14,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),

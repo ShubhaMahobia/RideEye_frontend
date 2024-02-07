@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rideeye/authentication/sign_up_screen.dart';
+
 import 'package:rideeye/controllers/sign_up_controller.dart';
 import 'package:rideeye/utils/buttons/b1.dart';
 import 'package:rideeye/utils/buttons/b2.dart';
@@ -17,6 +17,10 @@ class EmailVerification extends StatefulWidget {
 }
 
 String emailAddress = '';
+String userOtp = _signUpController.otpOneController.text +
+    _signUpController.otpTwoController.text +
+    _signUpController.otpThreeController.text +
+    _signUpController.otpFourController.text;
 final SignUpController _signUpController = Get.put(SignUpController());
 
 class _EmailVerificationState extends State<EmailVerification> {
@@ -29,6 +33,16 @@ class _EmailVerificationState extends State<EmailVerification> {
   void initState() {
     gettingEmailAddress();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _signUpController.otpOneController.clear();
+    _signUpController.otpTwoController.clear();
+    _signUpController.otpThreeController.clear();
+    _signUpController.otpFourController.clear();
+    _signUpController.emailController.clear();
+    super.dispose();
   }
 
   @override
@@ -73,8 +87,8 @@ class _EmailVerificationState extends State<EmailVerification> {
                     child: TextField(
                       readOnly: true,
                       textAlign: TextAlign.center,
-                      decoration:
-                          FormInputField.formTextField(context, emailAddress),
+                      decoration: FormInputField.formTextField(
+                          context, _signUpController.emailController.text),
                     ),
                   ),
                   const SizedBox(
@@ -90,6 +104,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                             FormInputField.formTextFieldContainer(context),
                         child: Center(
                           child: TextField(
+                            controller: _signUpController.otpOneController,
                             onChanged: (value) {
                               if (value.length == 1) {
                                 FocusScope.of(context).nextFocus();
@@ -115,34 +130,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                             FormInputField.formTextFieldContainer(context),
                         child: Center(
                           child: TextField(
-                            onChanged: (value) {
-                              if (value.length == 1) {
-                                FocusScope.of(context).nextFocus();
-                              }
-                              if (value.isEmpty) {
-                                FocusScope.of(context).previousFocus();
-                              }
-                            },
-                            style: GoogleFonts.plusJakartaSans(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 68,
-                        width: 68,
-                        decoration:
-                            FormInputField.formTextFieldContainer(context),
-                        child: Center(
-                          child: TextField(
+                            controller: _signUpController.otpTwoController,
                             onChanged: (value) {
                               if (value.length == 1) {
                                 FocusScope.of(context).nextFocus();
@@ -171,6 +159,36 @@ class _EmailVerificationState extends State<EmailVerification> {
                             FormInputField.formTextFieldContainer(context),
                         child: Center(
                           child: TextField(
+                            controller: _signUpController.otpThreeController,
+                            onChanged: (value) {
+                              if (value.length == 1) {
+                                FocusScope.of(context).nextFocus();
+                              }
+                              if (value.isEmpty) {
+                                FocusScope.of(context).previousFocus();
+                              }
+                            },
+                            style: GoogleFonts.plusJakartaSans(
+                                fontSize: 24, fontWeight: FontWeight.bold),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1),
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 68,
+                        width: 68,
+                        decoration:
+                            FormInputField.formTextFieldContainer(context),
+                        child: Center(
+                          child: TextField(
+                            controller: _signUpController.otpFourController,
                             onChanged: (value) {
                               if (value.length == 1) {
                                 FocusScope.of(context).nextFocus();
@@ -198,12 +216,10 @@ class _EmailVerificationState extends State<EmailVerification> {
                     height: MediaQuery.of(context).size.height * 0.25,
                   ),
                   ButtonOne(
-                    buttonText: 'Verify',
-                    onTap: () => Get.to(
-                      () => const SignUpScreen(),
-                      transition: Transition.fade,
-                    ),
-                  ),
+                      buttonText: 'Verify',
+                      onTap: () {
+                        _signUpController.verifyEmail(userOtp);
+                      }),
                   const SizedBox(
                     height: 20,
                   ),

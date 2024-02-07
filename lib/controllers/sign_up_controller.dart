@@ -21,6 +21,10 @@ class SignUpController extends GetxController {
   final TextEditingController addressThreeController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController busNumberController = TextEditingController();
+  final TextEditingController otpOneController = TextEditingController();
+  final TextEditingController otpTwoController = TextEditingController();
+  final TextEditingController otpThreeController = TextEditingController();
+  final TextEditingController otpFourController = TextEditingController();
 
   void signUp(
     String fullName,
@@ -41,13 +45,13 @@ class SignUpController extends GetxController {
           scholarController.text,
           addressOneController.text,
           addressTwoController.text,
-          phoneNumber)) {
+          phoneController.text)) {
         String body = json.encode({
           "fullName": fullName,
           "email": email,
           "password": password,
           "enrollmentNumber": enrollmentNumber,
-          "phoneNumber": "9479798601",
+          "phoneNumber": phoneNumber,
           "address": address,
           "busNumber": busNumber,
           "scholarNumber": scholarNumber,
@@ -72,7 +76,10 @@ class SignUpController extends GetxController {
             ),
           );
           SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.remove('email');
+          prefs.remove('userId');
           prefs.setString('email', email);
+          prefs.setString('userId', jsondata['data']['userId']);
         } else {
           EasyLoading.dismiss();
           showDialog(
@@ -88,7 +95,64 @@ class SignUpController extends GetxController {
       }
     } catch (e) {
       EasyLoading.dismiss();
-      print(e);
+      showDialog(
+        context: Get.context as BuildContext,
+        builder: (context) => ErrorDialog(
+          heading: 'Oops',
+          text: 'Something went Wrong :(',
+        ),
+      );
+    }
+  }
+
+  void verifyEmail(String otp) async {
+    try {
+      if (otp.length < 4) {
+        EasyLoading.dismiss();
+        showDialog(
+          context: Get.context as BuildContext,
+          builder: (context) => ErrorDialog(
+            heading: 'Oops',
+            text: 'OTP is not valid!',
+          ),
+        );
+      } else {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String userId = prefs.getString('userId') as String;
+        String body = json.encode({
+          "userId": userId,
+          "otp": otp,
+        });
+        http.Response res = await http.post(
+          Uri.parse('https://rideeyebackend.azurewebsites.net/api/verifyOTP'),
+          headers: {'Content-Type': 'application/json'},
+          body: body,
+        );
+        var jsondata = json.decode(res.body);
+        if (jsondata['message'] == "Email Verified Successfully") {
+          EasyLoading.dismiss();
+          showDialog(
+            context: Get.context as BuildContext,
+            builder: (context) => SuccessDailog(
+              heading: 'Success',
+              text: 'Email Verified Successfully',
+              onTap: () {},
+            ),
+          );
+        } else {
+          EasyLoading.dismiss();
+
+          showDialog(
+            context: Get.context as BuildContext,
+            builder: (context) => ErrorDialog(
+              heading: 'Oops',
+              text: jsondata['message'],
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      EasyLoading.dismiss();
       showDialog(
         context: Get.context as BuildContext,
         builder: (context) => ErrorDialog(

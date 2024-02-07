@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,7 +17,7 @@ class FormInputField {
       hintStyle: GoogleFonts.plusJakartaSans(
         fontWeight: FontWeight.bold,
         fontSize: 16,
-        color: Color.fromARGB(255, 189, 189, 189),
+        color: const Color.fromARGB(255, 189, 189, 189),
       ),
       border: InputBorder.none,
     );
