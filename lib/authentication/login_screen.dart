@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rideeye/authentication/sign_up_screen.dart';
 import 'package:rideeye/utils/buttons/b1.dart';
 import 'package:rideeye/utils/buttons/b2.dart';
-import 'package:rideeye/utils/textFields/input_text_1.dart';
+import 'package:rideeye/utils/textFields/inputDecoration.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -52,19 +52,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController: emailController,
-                    hintText: 'Email address'),
+                TextField(
+                  controller: emailController,
+                  decoration:
+                      FormInputField.formTextField(context, 'Email Address'),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: true,
-                    textEditingController: passwordController,
-                    hintText: 'Password'),
+                TextField(
+                  controller: passwordController,
+                  decoration: FormInputField.formTextField(context, 'Password'),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(

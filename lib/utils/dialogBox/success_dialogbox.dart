@@ -7,7 +7,12 @@ import 'package:rideeye/authentication/login_screen.dart';
 class SuccessDailog extends StatelessWidget {
   String heading;
   String text;
-  SuccessDailog({super.key, required this.heading, required this.text});
+  VoidCallback onTap;
+  SuccessDailog(
+      {super.key,
+      required this.heading,
+      required this.text,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +47,13 @@ class SuccessDailog extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => const LoginScreen());
+                onTap();
               },
               child: Text(
                 'Continue',
                 style: GoogleFonts.mochiyPopOne(),
               ),
-            )
+            ),
           ],
         ),
       ),

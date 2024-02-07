@@ -19,9 +19,9 @@ class ButtonOne extends StatelessWidget {
         child: Center(
             child: Text(
           buttonText,
-          style: GoogleFonts.mochiyPopOne(
+          style: GoogleFonts.plusJakartaSans(
             color: Colors.white,
-            fontSize: 12,
+            fontSize: 16,
           ),
         )),
       ),

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:rideeye/authentication/email_verification.dart';
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
 import 'package:rideeye/utils/dialogBox/success_dialogbox.dart';
 import 'package:rideeye/utils/validations/validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpController extends GetxController {
   final TextEditingController fullNameController = TextEditingController();
@@ -20,7 +22,7 @@ class SignUpController extends GetxController {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController busNumberController = TextEditingController();
 
-  signUp(
+  void signUp(
     String fullName,
     String email,
     String password,
@@ -64,8 +66,13 @@ class SignUpController extends GetxController {
             builder: (context) => SuccessDailog(
               heading: 'Success',
               text: 'Verification Email Sent!!!',
+              onTap: () {
+                Get.to(() => const EmailVerification());
+              },
             ),
           );
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('email', email);
         } else {
           EasyLoading.dismiss();
           showDialog(
