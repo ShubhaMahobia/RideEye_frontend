@@ -8,7 +8,7 @@ import 'package:rideeye/authentication/login_screen.dart';
 import 'package:rideeye/controllers/sign_up_controller.dart';
 import 'package:rideeye/utils/buttons/b1.dart';
 import 'package:rideeye/utils/buttons/b2.dart';
-import 'package:rideeye/utils/textFields/input_text_1.dart';
+import 'package:rideeye/utils/textFields/inputDecoration.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -55,44 +55,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController: _signUpController.fullNameController,
-                    hintText: 'Full name*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.fullNameController,
+                    decoration:
+                        FormInputField.formTextField(context, 'Full name*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController: _signUpController.emailController,
-                    hintText: 'Email address*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _signUpController.emailController,
+                    decoration:
+                        FormInputField.formTextField(context, 'Email address*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: true,
-                    textEditingController: _signUpController.passwordController,
-                    hintText: 'Password*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.passwordController,
+                    decoration:
+                        FormInputField.formTextField(context, 'Password*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController:
-                        _signUpController.enrollmentController,
-                    hintText: 'Enrollment Number*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.enrollmentController,
+                    decoration: FormInputField.formTextField(
+                        context, 'Enrollment Number*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: true,
-                    isPassword: false,
-                    textEditingController: _signUpController.scholarController,
-                    hintText: 'Scholar Number*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    keyboardType: TextInputType.phone,
+                    controller: _signUpController.scholarController,
+                    decoration: FormInputField.formTextField(
+                        context, 'Scholar Number*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -175,6 +191,20 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
   }
 
   @override
+  void dispose() {
+    _signUpController.fullNameController;
+    _signUpController.emailController;
+    _signUpController.passwordController;
+    _signUpController.enrollmentController;
+    _signUpController.scholarController;
+    _signUpController.addressOneController;
+    _signUpController.addressTwoController;
+    _signUpController.addressThreeController;
+    _signUpController.phoneController;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -200,7 +230,7 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                   width: 280,
                   child: Text(
                     'Create Account',
-                    style: GoogleFonts.mochiyPopOne(
+                    style: GoogleFonts.plusJakartaSans(
                       fontSize: 28,
                     ),
                     textAlign: TextAlign.center,
@@ -220,50 +250,59 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                     ),
                     SizedBox(
                       width: 180,
-                      child: InputTextOne(
-                          isNumber: false,
-                          isPassword: false,
-                          textEditingController:
-                              _signUpController.busNumberController,
-                          hintText: 'Optional'),
+                      child: TextField(
+                        controller: _signUpController.busNumberController,
+                        decoration:
+                            FormInputField.formTextField(context, 'Optional'),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController:
-                        _signUpController.addressOneController,
-                    hintText: 'Address Line 1*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.addressOneController,
+                    decoration: FormInputField.formTextField(
+                        context, 'Address Line 1*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController:
-                        _signUpController.addressTwoController,
-                    hintText: 'Address Line 2*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.addressTwoController,
+                    decoration: FormInputField.formTextField(
+                        context, 'Address Line 2*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: false,
-                    isPassword: false,
-                    textEditingController:
-                        _signUpController.addressThreeController,
-                    hintText: 'Address Line 3 (Optional)'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.addressThreeController,
+                    decoration: FormInputField.formTextField(
+                        context, 'Address Line 3 (Optional)*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                InputTextOne(
-                    isNumber: true,
-                    isPassword: false,
-                    textEditingController: _signUpController.phoneController,
-                    hintText: 'Phone Number*'),
+                Container(
+                  decoration: FormInputField.formTextFieldContainer(context),
+                  child: TextField(
+                    controller: _signUpController.phoneController,
+                    keyboardType: TextInputType.number,
+                    decoration:
+                        FormInputField.formTextField(context, 'Phone Number*'),
+                  ),
+                ),
                 const SizedBox(
                   height: 60,
                 ),

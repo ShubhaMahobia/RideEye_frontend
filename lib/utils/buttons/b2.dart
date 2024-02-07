@@ -21,7 +21,8 @@ class ButtonTwo extends StatelessWidget {
         child: Center(
             child: Text(
           buttonText,
-          style: GoogleFonts.mochiyPopOne(color: Colors.black, fontSize: 12),
+          style: GoogleFonts.plusJakartaSans(
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
         )),
       ),
     );

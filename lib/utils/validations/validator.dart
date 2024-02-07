@@ -70,7 +70,7 @@ class Validation {
       );
       return false;
     }
-    if (eno.length > 6) {
+    if (eno.length < 6) {
       showDialog(
         context: Get.context as BuildContext,
         builder: (context) => ErrorDialog(
