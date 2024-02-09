@@ -25,6 +25,7 @@ class SignUpController extends GetxController {
   final TextEditingController otpTwoController = TextEditingController();
   final TextEditingController otpThreeController = TextEditingController();
   final TextEditingController otpFourController = TextEditingController();
+  String otp = '';
 
   void signUp(
     String fullName,
@@ -63,6 +64,7 @@ class SignUpController extends GetxController {
         );
 
         var jsondata = json.decode(res.body);
+
         if (jsondata['success'] == true) {
           EasyLoading.dismiss();
           showDialog(
@@ -99,7 +101,7 @@ class SignUpController extends GetxController {
         context: Get.context as BuildContext,
         builder: (context) => ErrorDialog(
           heading: 'Oops',
-          text: 'Something went Wrong :(',
+          text: e.toString(),
         ),
       );
     }
@@ -129,7 +131,7 @@ class SignUpController extends GetxController {
           body: body,
         );
         var jsondata = json.decode(res.body);
-        if (jsondata['message'] == "Email Verified Successfully") {
+        if (jsondata['success'] == true) {
           EasyLoading.dismiss();
           showDialog(
             context: Get.context as BuildContext,
@@ -153,6 +155,54 @@ class SignUpController extends GetxController {
       }
     } catch (e) {
       EasyLoading.dismiss();
+      showDialog(
+        context: Get.context as BuildContext,
+        builder: (context) => ErrorDialog(
+          heading: 'Oops',
+          text: 'Something went Wrong :(',
+        ),
+      );
+    }
+  }
+
+  void resendOTP() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String userId = prefs.getString('userId') as String;
+      String body = json.encode({
+        "userId": userId,
+        "email": emailController.text,
+      });
+      http.Response res = await http.post(
+        Uri.parse('https://rideeyebackend.azurewebsites.net/api/resendOTP'),
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+      var jsondata = json.decode(res.body);
+
+      if (jsondata['success'] == true) {
+        EasyLoading.dismiss();
+        showDialog(
+          context: Get.context as BuildContext,
+          builder: (context) => SuccessDailog(
+            onTap: () {},
+            heading: 'Sent!',
+            text: 'OTP sent Successfully!!',
+          ),
+        );
+      } else {
+        EasyLoading.dismiss();
+        showDialog(
+          context: Get.context as BuildContext,
+          builder: (context) => ErrorDialog(
+            heading: 'OOPS',
+            text: jsondata['message'],
+          ),
+        );
+      }
+    } catch (e) {
+      EasyLoading.dismiss();
+
       showDialog(
         context: Get.context as BuildContext,
         builder: (context) => ErrorDialog(

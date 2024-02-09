@@ -33,12 +33,14 @@ class SuccessDailog extends StatelessWidget {
             ),
             Text(
               heading,
-              style: GoogleFonts.mochiyPopOne(
-                  fontSize: 24, fontWeight: FontWeight.bold),
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
               text,
-              style: GoogleFonts.mochiyPopOne(
+              style: GoogleFonts.plusJakartaSans(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
                   color: Colors.grey),

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -333,6 +334,10 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
                         fontSize: 14, fontWeight: FontWeight.w600),
                     controller: _signUpController.phoneController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(10),
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration:
                         FormInputField.formTextField(context, 'Phone Number*'),
                   ),
