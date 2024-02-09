@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rideeye/authentication/login_screen.dart';
 
 // ignore: must_be_immutable
 class SuccessDailog extends StatelessWidget {
@@ -35,12 +33,14 @@ class SuccessDailog extends StatelessWidget {
             ),
             Text(
               heading,
-              style: GoogleFonts.mochiyPopOne(
-                  fontSize: 24, fontWeight: FontWeight.bold),
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
               text,
-              style: GoogleFonts.mochiyPopOne(
+              style: GoogleFonts.plusJakartaSans(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
                   color: Colors.grey),
