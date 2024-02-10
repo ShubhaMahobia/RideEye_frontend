@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:rideeye/authentication/email_verification.dart';
+import 'package:rideeye/authentication/login_screen.dart';
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
 import 'package:rideeye/utils/dialogBox/success_dialogbox.dart';
 import 'package:rideeye/utils/validations/validator.dart';
@@ -138,7 +139,9 @@ class SignUpController extends GetxController {
             builder: (context) => SuccessDailog(
               heading: 'Success',
               text: 'Email Verified Successfully',
-              onTap: () {},
+              onTap: () {
+                Get.to(const LoginScreen());
+              },
             ),
           );
         } else {

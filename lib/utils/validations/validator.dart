@@ -92,4 +92,59 @@ class Validation {
     }
     return true;
   }
+
+  bool isValidLogin(String email, String password) {
+    bool isEmailValid(String email) {
+      // Define a regular expression for validating an Email
+      final RegExp emailRegex = RegExp(
+        r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$',
+      );
+
+      // Check if the provided email matches the regular expression
+      return emailRegex.hasMatch(email);
+    }
+
+    if (email.isEmpty) {
+      showDialog(
+        context: Get.context as BuildContext,
+        builder: (context) => ErrorDialog(
+          heading: 'Oops',
+          text: 'Email cannot be empty!!',
+        ),
+      );
+      return false;
+    }
+    if (password.isEmpty) {
+      showDialog(
+        context: Get.context as BuildContext,
+        builder: (context) => ErrorDialog(
+          heading: 'Oops',
+          text: 'Password cannot be empty!!',
+        ),
+      );
+      return false;
+    }
+
+    if (isEmailValid(email) == false) {
+      showDialog(
+        context: Get.context as BuildContext,
+        builder: (context) => ErrorDialog(
+          heading: 'Oops',
+          text: 'Email is not valid',
+        ),
+      );
+      return false;
+    }
+    if (password.length < 8) {
+      showDialog(
+        context: Get.context as BuildContext,
+        builder: (context) => ErrorDialog(
+          heading: 'Oops',
+          text: 'Password should of at least 8 Character',
+        ),
+      );
+      return false;
+    }
+    return true;
+  }
 }
