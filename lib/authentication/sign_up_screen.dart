@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: 280,
                   child: Text(
                     'Create Account',
-                    style: GoogleFonts.mochiyPopOne(
+                    style: GoogleFonts.plusJakartaSans(
                       fontSize: 28,
                     ),
                     textAlign: TextAlign.center,
@@ -157,9 +157,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     Text(
                       'Already Member? ',
-                      style: GoogleFonts.mochiyPopOne(
-                        fontSize: 12,
-                      ),
+                      style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     GestureDetector(
@@ -169,8 +168,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       child: Text(
                         'Log in',
-                        style: GoogleFonts.mochiyPopOne(
-                            fontSize: 12, color: Colors.blue),
+                        style: GoogleFonts.plusJakartaSans(
+                            fontSize: 14,
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
