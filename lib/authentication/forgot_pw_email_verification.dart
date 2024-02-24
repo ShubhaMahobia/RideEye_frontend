@@ -85,7 +85,7 @@ class _ForgotPasswordEmailVerificationState
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.25,
+                  height: MediaQuery.of(context).size.height * 0.20,
                 ),
                 ButtonOne(
                     buttonText: 'Send OTP',
