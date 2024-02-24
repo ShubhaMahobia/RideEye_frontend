@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rideeye/authentication/forgot_pw_email_verification.dart';
 import 'package:rideeye/authentication/sign_up_screen.dart';
 import 'package:rideeye/controllers/login_controller.dart';
 import 'package:rideeye/utils/buttons/b1.dart';
@@ -83,7 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(() => const ForgotPasswordEmailVerification(),
+                              transition: Transition.noTransition);
+                        },
                         child: Text(
                           'Forgot Password?',
                           style: GoogleFonts.plusJakartaSans(
