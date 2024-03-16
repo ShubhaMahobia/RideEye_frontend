@@ -3,7 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:rideeye/authentication/login_screen.dart';
-import 'package:rideeye/home_page.dart';
+import 'package:rideeye/userProfile/user_profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // Import your token manager or wherever you handle token logic
 
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasError || snapshot.data == false) {
               return const LoginScreen(); // Redirect to login screen if token is absent or expired
             } else {
-              return const HomePage(); // Redirect to home screen if token is present and not expired
+              return const UserProfile(); // Redirect to home screen if token is present and not expired
             }
           }
         },
