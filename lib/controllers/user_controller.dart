@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:rideeye/authentication/login_screen.dart';
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
+import 'package:rideeye/utils/dialogBox/logout_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -53,5 +55,20 @@ class UserController extends GetxController {
       );
     }
     return null;
+  }
+
+
+  void userLogout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    showDialog(
+      context: Get.context as BuildContext,
+      builder: (context) => LogoutDialog(
+        onTap: () {
+          Get.to(() => const LoginScreen(),
+              transition: Transition.noTransition);
+        },
+      ),
+    );
   }
 }

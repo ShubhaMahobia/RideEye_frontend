@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rideeye/controllers/user_controller.dart';
+import 'package:rideeye/userProfile/edit_profile.dart';
 import 'package:rideeye/utils/buttons/b3_user_profile.dart';
 
 class UserProfile extends StatefulWidget {
@@ -83,7 +84,10 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                     ),
                     UserProfileButton(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const EditProfile(),
+                            transition: Transition.noTransition);
+                      },
                       buttonText: 'Edit Profile',
                       iconPath: 'assets/images/pencil.png',
                     ),
@@ -106,7 +110,9 @@ class _UserProfileState extends State<UserProfile> {
                       height: MediaQuery.of(context).size.height * 0.075,
                     ),
                     UserProfileButton(
-                      onTap: () {},
+                      onTap: () {
+                        _userController.userLogout();
+                      },
                       buttonText: 'Logout',
                       iconPath: 'assets/images/logout.png',
                     )
