@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:rideeye/authentication/email_verification_fw.dart';
 import 'package:rideeye/authentication/login_screen.dart';
 import 'package:rideeye/authentication/reset_password.dart';
-import 'package:rideeye/home_page.dart';
+import 'package:rideeye/userProfile/user_profile.dart';
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
 import 'package:rideeye/utils/validations/validator.dart';
 import 'package:http/http.dart' as http;
@@ -45,7 +45,8 @@ class LoginController extends GetxController {
           var myToken = jsondata['token'];
           prefs.setString('token', myToken);
 
-          Get.to(() => const HomePage(), transition: Transition.noTransition);
+          Get.to(() => const UserProfile(),
+              transition: Transition.noTransition);
         } else {
           EasyLoading.dismiss();
           showDialog(

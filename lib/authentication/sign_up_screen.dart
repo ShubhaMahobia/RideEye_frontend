@@ -140,7 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     buttonText: 'Next',
                     onTap: () => Get.to(
                       () => const SignUpScreenTwo(),
-                      transition: Transition.fade,
+                      transition: Transition.noTransition,
                     ),
                   ),
                   const SizedBox(
@@ -165,7 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       GestureDetector(
                         onTap: () => Get.to(
                           () => const LoginScreen(),
-                          transition: Transition.fade,
+                          transition: Transition.noTransition,
                         ),
                         child: Text(
                           'Log in',
