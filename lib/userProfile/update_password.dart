@@ -6,18 +6,19 @@ import 'package:rideeye/controllers/login_controller.dart';
 import 'package:rideeye/utils/buttons/b1.dart';
 import 'package:rideeye/utils/textFields/inputDecoration.dart';
 
-class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+class UpdatePassword extends StatefulWidget {
+  const UpdatePassword({super.key});
 
   @override
-  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+  State<UpdatePassword> createState() => _UpdatePasswordState();
 }
 
 final LoginController _loginController = Get.put(LoginController());
 
-class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+class _UpdatePasswordState extends State<UpdatePassword> {
   @override
   void dispose() {
+    _loginController.emailController.clear();
     super.dispose();
   }
 
@@ -44,10 +45,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     width: MediaQuery.of(context).size.width * 0.533,
                   ),
                   SizedBox(
-                    height: 40,
+                    height: MediaQuery.of(context).size.height * 0.1,
                     width: 320,
                     child: Text(
-                      'Reset Your Password',
+                      'Want to Change Your Password?',
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 28,
                       ),
@@ -55,28 +56,17 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  Image.asset(
-                    'assets/icons/security.png',
-                    height: MediaQuery.of(context).size.height * 0.1175,
-                    width: MediaQuery.of(context).size.width * 0.533,
+                    height: MediaQuery.of(context).size.height * 0.20,
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: FormInputField.formTextFieldContainer(context),
-                    child: TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _loginController.resetPasswordController,
+                    height: 50,
+                    width: 250,
+                    child: Text(
+                      'Enter your registered email address to reset your password',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16,
+                      ),
                       textAlign: TextAlign.center,
-                      decoration: FormInputField.formTextField(
-                          context, 'Enter New Password*'),
-                      obscureText: true,
                     ),
                   ),
                   const SizedBox(
@@ -86,22 +76,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     decoration: FormInputField.formTextFieldContainer(context),
                     child: TextField(
                       keyboardType: TextInputType.emailAddress,
-                      controller: _loginController.confirmPasswordController,
+                      controller: _loginController.emailController,
                       textAlign: TextAlign.center,
                       decoration: FormInputField.formTextField(
-                          context, 'Confirm your Password*'),
-                      obscureText: true,
+                          context, 'Email address*'),
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.20,
                   ),
                   ButtonOne(
-                      buttonText: _loginController.fromEditProfile.value
-                          ? 'Update your Password'
-                          : 'Reset & Login',
+                      buttonText: 'Send OTP',
                       onTap: () {
-                        _loginController.resetPassword();
+                        _loginController.sendVerifcationMailForgotPassword(
+                            _loginController.emailController.text);
                       }),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,

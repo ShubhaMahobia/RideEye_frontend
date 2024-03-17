@@ -74,6 +74,7 @@ class _EmailVerificationState extends State<EmailVerification> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Padding(

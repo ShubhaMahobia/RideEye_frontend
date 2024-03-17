@@ -22,6 +22,7 @@ class LoginController extends GetxController {
   TextEditingController resetPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   var user = {}.obs;
+  RxBool fromEditProfile = false.obs;
 
   void userLogin() async {
     if (Validation()
@@ -208,7 +209,10 @@ class LoginController extends GetxController {
 
         if (jsondata['success'] == true) {
           EasyLoading.dismiss();
-          Get.to(() => const LoginScreen(),
+          Get.to(
+              () => fromEditProfile.value
+                  ? const UserProfile()
+                  : const LoginScreen(),
               transition: Transition.noTransition);
         } else {
           EasyLoading.dismiss();

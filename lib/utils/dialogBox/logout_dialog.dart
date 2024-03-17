@@ -21,9 +21,9 @@ class LogoutDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/icons/ic_error.png',
-              height: 80,
-              width: 80,
+              'assets/icons/power-off.png',
+              height: 60,
+              width: 60,
             ),
             Text(
               'Are you sure you want to logout?',
