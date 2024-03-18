@@ -39,6 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
@@ -235,170 +236,164 @@ class _SignUpScreenTwoState extends State<SignUpScreenTwo> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 20,
+          physics: const BouncingScrollPhysics(),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Image.asset(
+                    'assets/icons/ride_logo_trsprnt.png',
+                    height: MediaQuery.of(context).size.height * 0.1175,
+                    width: MediaQuery.of(context).size.width * 0.533,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: 280,
+                    child: Text(
+                      'Create Account',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 28,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    Image.asset(
-                      'assets/icons/ride_logo_trsprnt.png',
-                      height: MediaQuery.of(context).size.height * 0.1175,
-                      width: MediaQuery.of(context).size.width * 0.533,
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Bus Number',
+                        style: GoogleFonts.mochiyPopOne(),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        decoration:
+                            FormInputField.formTextFieldContainer(context),
+                        width: 180,
+                        child: TextField(
+                          style: GoogleFonts.plusJakartaSans(
+                              fontSize: 14, fontWeight: FontWeight.w600),
+                          controller: _signUpController.busNumberController,
+                          decoration:
+                              FormInputField.formTextField(context, 'Optional'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: FormInputField.formTextFieldContainer(context),
+                    child: TextField(
+                      style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14, fontWeight: FontWeight.w600),
+                      controller: _signUpController.addressOneController,
+                      decoration: FormInputField.formTextField(
+                          context, 'Address Line 1*'),
                     ),
-                    SizedBox(
-                      height: 40,
-                      width: 280,
-                      child: Text(
-                        'Create Account',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: FormInputField.formTextFieldContainer(context),
+                    child: TextField(
+                      style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14, fontWeight: FontWeight.w600),
+                      controller: _signUpController.addressTwoController,
+                      decoration: FormInputField.formTextField(
+                          context, 'Address Line 2*'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: FormInputField.formTextFieldContainer(context),
+                    child: TextField(
+                      style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14, fontWeight: FontWeight.w600),
+                      controller: _signUpController.addressThreeController,
+                      decoration: FormInputField.formTextField(
+                          context, 'Address Line 3 (Optional)*'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    decoration: FormInputField.formTextFieldContainer(context),
+                    child: TextField(
+                      style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14, fontWeight: FontWeight.w600),
+                      controller: _signUpController.phoneController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(10),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: FormInputField.formTextField(
+                          context, 'Phone Number*'),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 60,
+                  ),
+                  ButtonOne(
+                    buttonText: 'Create Account',
+                    onTap: () async {
+                      EasyLoading.show(status: 'Saving...');
+                      _signUpController.signUp(
+                        _signUpController.fullNameController.text,
+                        _signUpController.emailController.text,
+                        _signUpController.passwordController.text,
+                        _signUpController.enrollmentController.text,
+                        completeAddress,
+                        _signUpController.phoneController.text,
+                        busNumber,
+                        _signUpController.scholarController.text,
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already Member? ',
                         style: GoogleFonts.plusJakartaSans(
-                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'Bus Number',
-                          style: GoogleFonts.mochiyPopOne(),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Container(
-                          decoration:
-                              FormInputField.formTextFieldContainer(context),
-                          width: 180,
-                          child: TextField(
-                            style: GoogleFonts.plusJakartaSans(
-                                fontSize: 14, fontWeight: FontWeight.w600),
-                            controller: _signUpController.busNumberController,
-                            decoration: FormInputField.formTextField(
-                                context, 'Optional'),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      decoration:
-                          FormInputField.formTextFieldContainer(context),
-                      child: TextField(
-                        style: GoogleFonts.plusJakartaSans(
-                            fontSize: 14, fontWeight: FontWeight.w600),
-                        controller: _signUpController.addressOneController,
-                        decoration: FormInputField.formTextField(
-                            context, 'Address Line 1*'),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      decoration:
-                          FormInputField.formTextFieldContainer(context),
-                      child: TextField(
-                        style: GoogleFonts.plusJakartaSans(
-                            fontSize: 14, fontWeight: FontWeight.w600),
-                        controller: _signUpController.addressTwoController,
-                        decoration: FormInputField.formTextField(
-                            context, 'Address Line 2*'),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      decoration:
-                          FormInputField.formTextFieldContainer(context),
-                      child: TextField(
-                        style: GoogleFonts.plusJakartaSans(
-                            fontSize: 14, fontWeight: FontWeight.w600),
-                        controller: _signUpController.addressThreeController,
-                        decoration: FormInputField.formTextField(
-                            context, 'Address Line 3 (Optional)*'),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      decoration:
-                          FormInputField.formTextFieldContainer(context),
-                      child: TextField(
-                        style: GoogleFonts.plusJakartaSans(
-                            fontSize: 14, fontWeight: FontWeight.w600),
-                        controller: _signUpController.phoneController,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(10),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: FormInputField.formTextField(
-                            context, 'Phone Number*'),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    ButtonOne(
-                      buttonText: 'Create Account',
-                      onTap: () async {
-                        EasyLoading.show(status: 'Saving...');
-                        _signUpController.signUp(
-                          _signUpController.fullNameController.text,
-                          _signUpController.emailController.text,
-                          _signUpController.passwordController.text,
-                          _signUpController.enrollmentController.text,
-                          completeAddress,
-                          _signUpController.phoneController.text,
-                          busNumber,
-                          _signUpController.scholarController.text,
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Already Member? ',
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'Log in',
                           style: GoogleFonts.plusJakartaSans(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
+                              fontSize: 14,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'Log in',
-                            style: GoogleFonts.plusJakartaSans(
-                                fontSize: 14,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

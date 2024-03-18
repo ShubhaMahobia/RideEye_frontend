@@ -32,6 +32,7 @@ class LoginController extends GetxController {
           "email": emailController.text,
           "password": passwordController.text
         });
+        EasyLoading.show(status: 'Hang on...');
         http.Response res = await http.post(
           Uri.parse('https://rideeyebackend.azurewebsites.net/api/login'),
           headers: {'Content-Type': 'application/json'},

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rideeye/authentication/forgot_pw_email_verification.dart';
@@ -19,6 +18,14 @@ class LoginScreen extends StatefulWidget {
 final LoginController _loginController = Get.put(LoginController());
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  @override
+  void dispose() {
+    _loginController.emailController.clear();
+    _loginController.passwordController.clear();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -107,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ButtonOne(
                       buttonText: 'Sign In',
                       onTap: () {
-                        EasyLoading.show(status: 'Hang on...');
                         _loginController.userLogin();
                       }),
                   const SizedBox(
