@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rideeye/controllers/user_controller.dart';
@@ -25,7 +26,6 @@ class _EditProfileState extends State<EditProfile> {
     super.initState();
   }
 
-
   @override
   void dispose() {
     _userController.nameController.clear();
@@ -34,7 +34,6 @@ class _EditProfileState extends State<EditProfile> {
     _userController.enoController.clear();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +77,6 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
               ),
-
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.035,
               ),
@@ -98,8 +96,7 @@ class _EditProfileState extends State<EditProfile> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
-                      decoration:
-                          const InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter your Full Name'),
                     ),
@@ -118,12 +115,16 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: Center(
                     child: TextField(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(10),
+                      ],
+                      enableSuggestions: true,
+                      keyboardType: TextInputType.number,
                       controller: _userController.phoneController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
-                      decoration:
-                          const InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter your Phone Number'),
                     ),
@@ -142,12 +143,15 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: Center(
                     child: TextField(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(6),
+                      ],
+                      keyboardType: TextInputType.number,
                       controller: _userController.scholarNumberController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
-                      decoration:
-                          const InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter your Scholar Number'),
                     ),
@@ -170,8 +174,7 @@ class _EditProfileState extends State<EditProfile> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
-                      decoration:
-                          const InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: 'Enter your Enrollment Number'),
                     ),
