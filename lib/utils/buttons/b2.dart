@@ -15,14 +15,16 @@ class ButtonTwo extends StatelessWidget {
         height: 50,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 2.0),
+            border: Border.all(color: Colors.lightBlue, width: 2.0),
             borderRadius: BorderRadius.circular(10),
             color: Colors.white),
         child: Center(
             child: Text(
           buttonText,
           style: GoogleFonts.plusJakartaSans(
-              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+              color: Colors.lightBlue,
+              fontSize: 16,
+              fontWeight: FontWeight.bold),
         )),
       ),
     );

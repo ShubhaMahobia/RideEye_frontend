@@ -12,6 +12,10 @@ import 'package:http/http.dart' as http;
 
 class UserController extends GetxController {
   Map<String, dynamic> user = {};
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController scholarNumberController = TextEditingController();
+  TextEditingController enoController = TextEditingController();
 
   Future<Map<String, dynamic>?> fetchingUserDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
