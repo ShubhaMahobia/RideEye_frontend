@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rideeye/controllers/user_controller.dart';
 import 'package:rideeye/utils/buttons/b3_user_profile.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  final UserController _userController = Get.put(UserController());
+
+  @override
+  void initState() {
+    _userController.nameController.text = _userController.user['fullName'];
+    _userController.phoneController.text = _userController.user['phoneNumber'];
+    _userController.scholarNumberController.text =
+        _userController.user['scholarNumber'];
+    _userController.enoController.text =
+        _userController.user['enrollmentNumber'];
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +51,15 @@ class EditProfile extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  color: Colors.lightBlue,
-                  borderRadius: BorderRadius.circular(100),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 80,
+                  width: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
                 ),
               ),
               SizedBox(
@@ -53,6 +77,7 @@ class EditProfile extends StatelessWidget {
                   ),
                   child: Center(
                     child: TextField(
+                      controller: _userController.nameController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
@@ -74,6 +99,7 @@ class EditProfile extends StatelessWidget {
                   ),
                   child: Center(
                     child: TextField(
+                      controller: _userController.phoneController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
@@ -95,6 +121,7 @@ class EditProfile extends StatelessWidget {
                   ),
                   child: Center(
                     child: TextField(
+                      controller: _userController.scholarNumberController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
@@ -116,6 +143,7 @@ class EditProfile extends StatelessWidget {
                   ),
                   child: Center(
                     child: TextField(
+                      controller: _userController.enoController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
