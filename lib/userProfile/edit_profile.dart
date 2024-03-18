@@ -57,7 +57,6 @@ class _EditProfileState extends State<EditProfile> {
         physics: const BouncingScrollPhysics(),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -100,7 +99,9 @@ class _EditProfileState extends State<EditProfile> {
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
                       decoration:
-                          const InputDecoration(border: InputBorder.none),
+                          const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter your Full Name'),
                     ),
                   ),
                 ),
@@ -122,7 +123,9 @@ class _EditProfileState extends State<EditProfile> {
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
                       decoration:
-                          const InputDecoration(border: InputBorder.none),
+                          const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter your Phone Number'),
                     ),
                   ),
                 ),
@@ -144,7 +147,9 @@ class _EditProfileState extends State<EditProfile> {
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
                       decoration:
-                          const InputDecoration(border: InputBorder.none),
+                          const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter your Scholar Number'),
                     ),
                   ),
                 ),
@@ -166,7 +171,9 @@ class _EditProfileState extends State<EditProfile> {
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 16, fontWeight: FontWeight.w600),
                       decoration:
-                          const InputDecoration(border: InputBorder.none),
+                          const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Enter your Enrollment Number'),
                     ),
                   ),
                 ),

@@ -10,7 +10,7 @@ class SuccessSnackbar extends StatelessWidget {
   void _showSuccessSnackbar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(seconds: 1),
         backgroundColor: Colors.lightGreen,
         content: Text(
           textMsg,

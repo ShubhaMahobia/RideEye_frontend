@@ -10,7 +10,7 @@ class ErrorSnackBar extends StatelessWidget {
   void _showErrorSnackbar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(seconds: 1),
         backgroundColor: Colors.red,
         content: Text(
           textMsg,

@@ -8,6 +8,7 @@ import 'package:rideeye/authentication/login_screen.dart';
 import 'package:rideeye/authentication/reset_password.dart';
 import 'package:rideeye/userProfile/user_profile.dart';
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
+import 'package:rideeye/utils/snackbar/error_snackbar.dart';
 import 'package:rideeye/utils/validations/validator.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,13 +78,8 @@ class LoginController extends GetxController {
       EasyLoading.show(status: 'Hang on...');
       if (emailController.text.isEmpty) {
         EasyLoading.dismiss();
-        showDialog(
-          context: Get.context as BuildContext,
-          builder: (context) => ErrorDialog(
-            heading: 'Oops',
-            text: 'Email Field Cannot be empty',
-          ),
-        );
+        ErrorSnackBar(textMsg: 'Email Cannot be Empty!')
+            .show(Get.context as BuildContext);
       } else {
         String body = json.encode({
           "email": email,
