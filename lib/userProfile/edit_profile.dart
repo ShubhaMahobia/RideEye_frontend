@@ -186,7 +186,9 @@ class _EditProfileState extends State<EditProfile> {
               ),
               UserProfileButton(
                 buttonText: 'SAVE',
-                onTap: () {},
+                onTap: () {
+                  _userController.updateUserProfile();
+                },
                 iconPath: 'assets/images/save-instagram.png',
               ),
             ],

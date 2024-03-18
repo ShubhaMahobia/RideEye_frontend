@@ -16,6 +16,12 @@ class UpdatePassword extends StatefulWidget {
 final LoginController _loginController = Get.put(LoginController());
 
 class _UpdatePasswordState extends State<UpdatePassword> {
+
+  @override
+  void initState() {
+    _loginController.emailController.clear();
+    super.initState();
+  }
   @override
   void dispose() {
     _loginController.emailController.clear();

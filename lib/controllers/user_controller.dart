@@ -5,8 +5,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:rideeye/authentication/login_screen.dart';
+import 'package:rideeye/userProfile/user_profile.dart';
 import 'package:rideeye/utils/dialogBox/error_dialog.dart';
 import 'package:rideeye/utils/dialogBox/logout_dialog.dart';
+import 'package:rideeye/utils/snackbar/error_snackbar.dart';
+import 'package:rideeye/utils/snackbar/success_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -74,5 +77,44 @@ class UserController extends GetxController {
         },
       ),
     );
+  }
+
+  void updateUserProfile() async {
+    try {
+      EasyLoading.show(status: 'Updating User Details');
+      String body = json.encode({
+        "userId": user['_id'],
+        "fullNameNew": nameController.text,
+        "phoneNumberNew": phoneController.text,
+        "scholarNumberNew": scholarNumberController.text,
+        "enrollmentNumberNew": enoController.text,
+      });
+
+      http.Response res = await http.put(
+        Uri.parse('https://rideeyebackend.azurewebsites.net/api/updateUser'),
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      );
+      var jsondata = json.decode(res.body);
+      if (jsondata['success'] == true) {
+        EasyLoading.dismiss();
+        SuccessSnackbar(
+          textMsg: 'User Details Updated',
+        ).show(Get.context as BuildContext);
+        await Future.delayed(const Duration(seconds: 1));
+        Get.to(() => const UserProfile());
+      } else {
+        EasyLoading.dismiss();
+        ErrorSnackBar(
+          textMsg: 'Internal Server Error',
+        ).show(Get.context as BuildContext);
+      }
+    } catch (e) {
+      print(e.toString());
+      EasyLoading.dismiss();
+      ErrorSnackBar(
+        textMsg: 'Something Went Wrong',
+      ).show(Get.context as BuildContext);
+    }
   }
 }
