@@ -61,14 +61,20 @@ final LoginController _loginController = Get.put(LoginController());
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 60,
-                                  width: 60,
+                                  height: 80,
+                                  width: 80,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
                                     color: Colors.lightBlue,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      'assets/images/profile_image.jpg',
+                                      fit: BoxFit
+                                          .cover, // Ensure image covers the entire container
+                                    ),
                                   ),
                                 ),
                               ),

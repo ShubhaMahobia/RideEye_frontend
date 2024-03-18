@@ -27,6 +27,16 @@ class _EditProfileState extends State<EditProfile> {
 
 
   @override
+  void dispose() {
+    _userController.nameController.clear();
+    _userController.phoneController.clear();
+    _userController.scholarNumberController.clear();
+    _userController.enoController.clear();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -60,10 +70,18 @@ class _EditProfileState extends State<EditProfile> {
                     color: Colors.lightBlue,
                     borderRadius: BorderRadius.circular(100),
                   ),
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/images/profile_image.jpg',
+                      fit: BoxFit
+                          .cover, // Ensure image covers the entire container
+                    ),
+                  ),
                 ),
               ),
+
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.065,
+                height: MediaQuery.of(context).size.height * 0.035,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
