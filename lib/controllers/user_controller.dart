@@ -80,7 +80,15 @@ class UserController extends GetxController {
   }
 
   void updateUserProfile() async {
-    try {
+    if (nameController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        scholarNumberController.text.isEmpty ||
+        enoController.text.isEmpty) {
+      ErrorSnackBar(
+        textMsg: "Please fill all the details!",
+      ).show(Get.context as BuildContext);
+    } else {
+      try {
       EasyLoading.show(status: 'Updating User Details');
       String body = json.encode({
         "userId": user['_id'],
@@ -109,12 +117,13 @@ class UserController extends GetxController {
           textMsg: 'Internal Server Error',
         ).show(Get.context as BuildContext);
       }
-    } catch (e) {
-      print(e.toString());
+      } catch (e) {
       EasyLoading.dismiss();
       ErrorSnackBar(
         textMsg: 'Something Went Wrong',
       ).show(Get.context as BuildContext);
     }
+    }
+    
   }
 }

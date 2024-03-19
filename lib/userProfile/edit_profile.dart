@@ -14,16 +14,40 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final UserController _userController = Get.put(UserController());
+  bool hasChanges = false;
+  String initialFullName = '';
+  String initialPhoneNumber = '';
+  String initialScholarNumber = '';
+  String initialEnrollmentNumber = '';
 
   @override
   void initState() {
-    _userController.nameController.text = _userController.user['fullName'];
-    _userController.phoneController.text = _userController.user['phoneNumber'];
-    _userController.scholarNumberController.text =
-        _userController.user['scholarNumber'];
-    _userController.enoController.text =
-        _userController.user['enrollmentNumber'];
+
+    initialFullName = _userController.user['fullName'];
+    initialPhoneNumber = _userController.user['phoneNumber'];
+    initialScholarNumber = _userController.user['scholarNumber'];
+    initialEnrollmentNumber = _userController.user['enrollmentNumber'];
+
+    _userController.nameController.text = initialFullName;
+    _userController.phoneController.text = initialPhoneNumber;
+    _userController.scholarNumberController.text = initialScholarNumber;
+    _userController.enoController.text = initialEnrollmentNumber;
+
+    _userController.nameController.addListener(updateChanges);
+    _userController.phoneController.addListener(updateChanges);
+    _userController.scholarNumberController.addListener(updateChanges);
+    _userController.enoController.addListener(updateChanges);    
     super.initState();
+  }
+
+  void updateChanges() {
+    setState(() {
+      hasChanges = (_userController.nameController.text != initialFullName ||
+          _userController.phoneController.text != initialPhoneNumber ||
+          _userController.scholarNumberController.text !=
+              initialScholarNumber ||
+          _userController.enoController.text != initialEnrollmentNumber);
+    });
   }
 
   @override
@@ -84,7 +108,7 @@ class _EditProfileState extends State<EditProfile> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 60,
-                  width: 320,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xFFc3c3c3), width: 1.5),
@@ -107,7 +131,7 @@ class _EditProfileState extends State<EditProfile> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 60,
-                  width: 320,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xFFc3c3c3), width: 1.5),
@@ -135,7 +159,7 @@ class _EditProfileState extends State<EditProfile> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 60,
-                  width: 320,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xFFc3c3c3), width: 1.5),
@@ -162,7 +186,7 @@ class _EditProfileState extends State<EditProfile> {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 60,
-                  width: 320,
+                  width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
                     border:
                         Border.all(color: const Color(0xFFc3c3c3), width: 1.5),
@@ -184,12 +208,17 @@ class _EditProfileState extends State<EditProfile> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.165,
               ),
-              UserProfileButton(
-                buttonText: 'SAVE',
-                onTap: () {
-                  _userController.updateUserProfile();
-                },
-                iconPath: 'assets/images/save-instagram.png',
+              Opacity(
+                opacity: hasChanges ? 1 : 0.5,
+                child: UserProfileButton(
+                  buttonText: 'SAVE',
+                  onTap: hasChanges
+                      ? () {
+                          _userController.updateUserProfile();
+                        }
+                      : () {},
+                  iconPath: 'assets/images/save-instagram.png',
+                ),
               ),
             ],
           ),
