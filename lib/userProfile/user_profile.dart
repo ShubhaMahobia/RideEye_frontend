@@ -6,6 +6,8 @@ import 'package:rideeye/controllers/user_controller.dart';
 import 'package:rideeye/userProfile/edit_profile.dart';
 import 'package:rideeye/userProfile/update_password.dart';
 import 'package:rideeye/utils/buttons/b3_user_profile.dart';
+import 'package:rideeye/utils/snackbar/error_snackbar.dart';
+import 'package:rideeye/utils/snackbar/success_snackbar.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -113,12 +115,20 @@ final LoginController _loginController = Get.put(LoginController());
                         iconPath: 'assets/images/security.png',
                       ),
                       UserProfileButton(
-                        onTap: () {},
+                        onTap: () {
+                          SuccessSnackbar(
+                            textMsg: "Coming Soon!",
+                          ).show(context);
+                        },
                         buttonText: 'Change  Route',
                         iconPath: 'assets/images/delivery.png',
                       ),
                       UserProfileButton(
-                        onTap: () {},
+                        onTap: () {
+                          ErrorSnackBar(
+                            textMsg: "Something Went Wrong!",
+                          ).show(context);
+                        },
                         buttonText: 'Change  Address',
                         iconPath: 'assets/images/location.png',
                       ),

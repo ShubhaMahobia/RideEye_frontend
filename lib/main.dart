@@ -40,15 +40,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
       ),
       home: FutureBuilder<bool>(
-        future: checkToken(), // Check token asynchronously
+        future: checkToken(), 
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return _buildLoading(); // Show loading indicator while checking token
+            return _buildLoading(); 
           } else {
             if (snapshot.hasError || snapshot.data == false) {
-              return const LoginScreen(); // Redirect to login screen if token is absent or expired
+              return const LoginScreen();
             } else {
-              return const UserProfile(); // Redirect to home screen if token is present and not expired
+              return const UserProfile();
             }
           }
         },
