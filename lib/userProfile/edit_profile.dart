@@ -23,31 +23,13 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
 
-    initialFullName = _userController.user['fullName'];
-    initialPhoneNumber = _userController.user['phoneNumber'];
-    initialScholarNumber = _userController.user['scholarNumber'];
-    initialEnrollmentNumber = _userController.user['enrollmentNumber'];
-
-    _userController.nameController.text = initialFullName;
-    _userController.phoneController.text = initialPhoneNumber;
-    _userController.scholarNumberController.text = initialScholarNumber;
-    _userController.enoController.text = initialEnrollmentNumber;
-
-    _userController.nameController.addListener(updateChanges);
-    _userController.phoneController.addListener(updateChanges);
-    _userController.scholarNumberController.addListener(updateChanges);
-    _userController.enoController.addListener(updateChanges);    
+    _userController.nameController.text = _userController.user['fullName'];
+    _userController.phoneController.text = _userController.user['phoneNumber'];
+    _userController.scholarNumberController.text =
+        _userController.user['scholarNumber'];
+    _userController.enoController.text =
+        _userController.user['enrollmentNumber'];
     super.initState();
-  }
-
-  void updateChanges() {
-    setState(() {
-      hasChanges = (_userController.nameController.text != initialFullName ||
-          _userController.phoneController.text != initialPhoneNumber ||
-          _userController.scholarNumberController.text !=
-              initialScholarNumber ||
-          _userController.enoController.text != initialEnrollmentNumber);
-    });
   }
 
   @override
@@ -116,6 +98,11 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: Center(
                     child: TextField(
+                      onEditingComplete: () {
+                        setState(() {
+                          hasChanges = true;
+                        });
+                      },
                       controller: _userController.nameController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
@@ -139,6 +126,11 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: Center(
                     child: TextField(
+                      onEditingComplete: () {
+                        setState(() {
+                          hasChanges = true;
+                        });
+                      },
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(10),
                       ],
@@ -167,6 +159,11 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: Center(
                     child: TextField(
+                      onEditingComplete: () {
+                        setState(() {
+                          hasChanges = true;
+                        });
+                      },
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(6),
                       ],
@@ -194,6 +191,11 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                   child: Center(
                     child: TextField(
+                      onEditingComplete: () {
+                        setState(() {
+                          hasChanges = true;
+                        });
+                      },
                       controller: _userController.enoController,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
