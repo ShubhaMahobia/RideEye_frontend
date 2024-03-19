@@ -109,7 +109,8 @@ final LoginController _loginController = Get.put(LoginController());
                           setState(() {
                             _loginController.fromEditProfile.value = true;
                           });
-                          Get.to(() => const UpdatePassword());
+                          Get.to(() => const UpdatePassword(),
+                              transition: Transition.noTransition);
                         },
                         buttonText: 'Change Password',
                         iconPath: 'assets/images/security.png',
